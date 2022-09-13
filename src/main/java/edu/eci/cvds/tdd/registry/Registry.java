@@ -6,8 +6,12 @@ public class Registry {
 
     ArrayList<Person> personsArrayList = new ArrayList<Person>();
     public RegisterResult registerVoter(Person p) {
-        // TODO Validate person and return real result.
-        // DEAD > 100 , 0 < UNDERAGE < 18, INVALID AGE < 0, 0 < VALID < 200
+
+        // DEAD isn't alive and age > 100
+        //UNDERAGE age < 18, age > 0 and alive
+        //INVALID_AGE age < 0 and alive
+        //VALID age < 100, age > 17 and alive
+        //DUPLICATED if id duplicate
         RegisterResult result = null;
 
         if (p.getAge() > 100 && !p.isAlive()){
@@ -16,7 +20,7 @@ public class Registry {
             result = RegisterResult.UNDERAGE;
         } else if (p.isAlive() && p.getAge() < 0) {
             result = RegisterResult.INVALID_AGE;
-        }else if (p.isAlive() && p.getAge() > 0 && p.getAge() < 200) {
+        }else if (p.isAlive() && p.getAge() < 100 && p.getAge() > 17) {
             result = RegisterResult.VALID;
         }for (Person registerPerson : personsArrayList){
             if (p.getId() == registerPerson.getId()){
